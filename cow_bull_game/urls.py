@@ -17,7 +17,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from cb_game import views
+from django.conf import settings
+from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('cb_game/',views.cb_game_soap_app),
+    path('', views.game_interface, name='game_interface'),
+    path('start_game/', views.start_game_view, name='start_game'),
+    path('play_game/', views.play_game_view, name='play_game'),
+    
+    
 ]
+if settings.DEBUG:
+        urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
